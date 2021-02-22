@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+section{
+    position: relative;
+    overflow: hidden;
+
+    z-index: 0;
+}
+section.section_home{
+    background: #333;
+}
+
+    section.section_home div.fit-content{
+        width: fit-content;
+    }
+    section.section_home h1{
+        font-size: 7rem;
+    }
+    section.section_home a{
+        font-size: 2.4rem;
+    }
+
+
+section *{
+    z-index: 1;
+}
+
+
+
+/*==============================================
+
+        BG Animation Text
+
+==============================================*/
+.bg-anim{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bg-anim a{
+    color: #fff;
+    display: block;
+
+    clip-path: inset(-1% 0 -1% -1%);
+
+    cursor: pointer;
+
+    transition: clip-path 0.5s ease-in-out;
+}
+.bg-anim a:nth-child(2) {
+    position: absolute;
+    color: #F44336;
+    clip-path: inset(-1% 100% -1% -1%);
+
+    transition: clip-path 0.5s ease-in-out;
+}
+.bg-anim:hover a{
+    clip-path: inset(-1% 100% -1% -1%);
+}
+.bg-anim:hover a:nth-child(2){
+    clip-path: inset(-1% 0 -1% -1%);
+}
+
+
+
+
+
+/*==============================================
+
+        Specific classes
+
+==============================================*/
+/*Flexboxes*/
+.flex{
+    display: flex;
+}
+.flex-centered{
+    justify-content: center;
+    align-items: center;
+}
+.flex-between{
+    justify-content: space-between;
+}
+.flex-col{
+    flex-direction: column;
+}
+
+
+/*Utilities*/
+.rubik{
+    font-family: 'Rubik Mono One', sans-serif;
+}
+.h100{
+    height: 100vh;
+}
+.text-white{
+    color: #fff;
+}
+
+
+/*Fill viewport*/
+.fill-viewport{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+    .fill-viewport video{
+        filter: blur(40px);
+
+        position: absolute;
+        top: -15%;
+        left: -15%;
+
+        width: 130%;
+        height: 130%;
+    }
