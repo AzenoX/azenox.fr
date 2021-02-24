@@ -3,6 +3,16 @@
     padding: 0;
     box-sizing: border-box;
 }
+html{
+    scroll-behavior: smooth;
+}
+a{
+    text-decoration: none;
+}
+:root{
+    --red: #F44336;
+    --dred: #D32F2F;
+}
 
 
 section{
@@ -14,7 +24,6 @@ section{
 section.section_home{
     background: #333;
 }
-
     section.section_home div.fit-content{
         width: fit-content;
     }
@@ -24,11 +33,65 @@ section.section_home{
     section.section_home a{
         font-size: 2.4rem;
     }
-
-
+    @media screen and (max-width: 1015px){
+        section.section_home h1{
+            font-size: 3rem !important;
+        }
+        section.section_home a{
+            font-size: 1.2rem !important;
+        }
+    }
 section *{
     z-index: 1;
 }
+
+
+
+/*=================================
+
+      Go to top
+
+==================================*/
+#topBtn, #botBtn{
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    padding: 15px;
+
+    width: 60px;
+    height: 60px;
+
+    z-index: 99;
+
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background: var(--red);
+
+    color: white;
+    font-size: 30px;
+
+    cursor: pointer;
+
+    transition: background 0.4s ease-out;
+}
+#topBtn {
+    right: 30px;
+    transform: rotate(-90deg);
+}
+#botBtn {
+    left: 30px;
+    transform: rotate(90deg);
+}
+#topBtn:hover, #botBtn:hover {
+    background: var(--dred);
+}
+
 
 
 
@@ -55,7 +118,7 @@ section *{
 }
 .bg-anim a:nth-child(2) {
     position: absolute;
-    color: #F44336;
+    color: var(--red);
     clip-path: inset(-1% 100% -1% -1%);
 
     transition: clip-path 0.5s ease-in-out;
@@ -65,6 +128,315 @@ section *{
 }
 .bg-anim:hover a:nth-child(2){
     clip-path: inset(-1% 0 -1% -1%);
+}
+
+
+
+/*=================================
+
+      Videos
+
+==================================*/
+.videos_list{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 0;
+}
+.youtube{
+    position: relative;
+
+    height: 280px;
+    width: 500px;
+
+    margin: 4% auto;
+
+    overflow: hidden;
+}
+.youtube img{
+    margin-top: -9.5%;
+    width: 100%;
+}
+.youtube .play-button{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 120px;
+    height: 60px;
+
+    border-radius: 2%;
+    background: rgba(0,0,0,0.8);
+
+    cursor: pointer;
+}
+.youtube .play-button:hover span{
+    transform: translateX(5px);
+}
+.youtube .play-button:hover span::before{
+    opacity: 1;
+    transform: translateX(0);
+}
+.youtube .play-button span{
+    position: relative;
+    font-size: 40px;
+    color: #fff;
+
+    transform: translateX(0);
+
+    transition: transform 0.3s ease-in-out;
+}
+.youtube .play-button span::before{
+    content: '';
+    position: absolute;
+    top: 17%;
+    left: -5px;
+
+    height: 30px;
+    width: 5px;
+
+    background: #fff;
+
+    opacity: 0;
+    transform: translateX(10px);
+
+    transition: opacity 0.2s ease-in-out, transform 0.3s ease-in-out;
+}
+.youtube iframe{
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+/*=================================
+
+      Videos Filters
+
+==================================*/
+.videos_header{
+    position: relative;
+
+    display: flex;
+    justify-content: space-evenly;
+}
+.videos_header > *:not(.nav){
+    width: 500px;
+}
+
+.nav {
+    position: absolute;
+    top: 25%;
+    right: 100px;
+    min-width: 400px;
+    max-height: 60px;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    z-index: 99;
+}
+@media screen and (max-width: 1015px){
+    .nav{
+        position: relative !important;
+    }
+    .videos_header{
+        flex-direction: column !important;
+    }
+    .videos_header > .page_title{
+        font-size: 2rem !important;
+        margin: 4vh auto !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+    .videos_header > .nav{
+        margin-right: auto !important;
+        margin-left: auto !important;
+        right: 0 !important;
+    }
+}
+.nav[class*=active-]:focus, .nav[class*=active-]:hover, .nav.focused[class*=active-] {
+    outline: none;
+    max-height: 600px;
+}
+.nav[class*=active-]:focus ul, .nav[class*=active-]:hover ul, .nav.focused[class*=active-] ul {
+    transform: translateY(0);
+    z-index: 9999;
+}
+.nav[class*=active-]:focus::after, .nav[class*=active-]:hover::after, .nav.focused[class*=active-]::after {
+    transform: rotateX(180deg);
+}
+.nav::after {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 20px;
+    color: white;
+    content: '▼';
+    font: normal normal normal 24px/1 octicons;
+    display: inline-block;
+    text-decoration: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 55px;
+    cursor: pointer;
+    transform: rotateX(0);
+    transition: all 0.2s ease-in-out;
+}
+.nav::before {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 20px;
+    color: white;
+    content: '☰';
+    font: normal normal normal 24px/1 octicons;
+    display: inline-block;
+    text-decoration: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 58px;
+    cursor: pointer;
+}
+.nav.active-1 ul {
+    transform: translateY(-60px);
+}
+.nav.active-2 ul {
+    transform: translateY(-120px);
+}
+.nav.active-3 ul {
+    transform: translateY(-180px);
+}
+.nav.active-4 ul {
+    transform: translateY(-240px);
+}
+.nav.active-5 ul {
+    transform: translateY(-300px);
+}
+.nav.active-6 ul {
+    transform: translateY(-360px);
+}
+.nav.active-7 ul {
+    transform: translateY(-420px);
+}
+.nav.active-8 ul {
+    transform: translateY(-480px);
+}
+.nav.active-9 ul {
+    transform: translateY(-540px);
+}
+.nav.active-10 ul {
+    transform: translateY(-600px);
+}
+.nav ul {
+    transform: translateY(0);
+    transition: all 0.2s ease-in-out;
+}
+.nav li{
+    z-index: 99;
+}
+.nav li > a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 60px;
+    background: var(--red);
+    transition: all 0.2s ease-in-out;
+}
+.nav li > a.selected {
+    background: var(--dred);
+    font-weight: 700;
+}
+.nav li > a:focus, .nav li > a:hover {
+    outline: none;
+    background: var(--dred);
+}
+
+
+
+
+/*=================================
+
+      Follow Me Section
+
+==================================*/
+.follow-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+
+    height: 70%;
+}
+.follow-wrapper > div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 100%;
+    height: 55%;
+}
+.follow-wrapper > div > div{
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+.follow-wrapper > div a{
+    width: 20%;
+}
+.follow-wrapper > div a:hover{
+    animation: wiggle 1s ease-in-out 1;
+}
+.follow-wrapper > div a svg{
+    width: 100%;
+}
+@media screen and (max-width: 1015px){
+    .follow-wrapper > div{
+        flex-direction: column;
+    }
+}
+@keyframes wiggle {
+    0% { transform: skewX(9deg); }
+    10% { transform: skewX(-8deg); }
+    20% { transform: skewX(7deg); }
+    30% { transform: skewX(-6deg); }
+    40% { transform: skewX(5deg); }
+    50% { transform: skewX(-4deg); }
+    60% { transform: skewX(3deg); }
+    70% { transform: skewX(-2deg); }
+    80% { transform: skewX(1deg); }
+    90% { transform: skewX(0deg); }
+    100% { transform: skewX(0deg); }
 }
 
 
@@ -93,6 +465,21 @@ section *{
 
 
 /*Utilities*/
+.page_title{
+    font-size: 3rem;
+    margin: 2%;
+}
+.section_title{
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+@media screen and (max-width: 1015px){
+    .section_title{
+        font-size: 3rem;
+    }
+}
 .rubik{
     font-family: 'Rubik Mono One', sans-serif;
 }
